@@ -1,0 +1,10 @@
+
+%article.video_category
+  .videos.row
+    .video.col-sm-8
+      = link_to '' do
+        %img(src="/tmp/monk_large.jpg")
+    .video.col-sm-4
+      %strong #{@video.title}
+      <br>
+      #{@video.description}
