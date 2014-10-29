@@ -1,0 +1,8 @@
+%article.video_category
+  %header
+    %h3= @category.name
+  .videos.row
+    .video.col-sm-8
+      - @category.videos.each do |video|
+        = link_to video_path(video) do
+          %img(src="#{video.small_cover_url}")
