@@ -29,7 +29,7 @@ describe VideosController do
       futurama = Fabricate(:video, title: 'Futurama')
       futurama2 = Fabricate(:video, title: 'Futurama')
       post :search, search_term: 'rama'
-      expect(assigns(:results)).to eql([futurama2, futurama])
+      expect(assigns(:results)).to  match_array([futurama2, futurama])
     end
 
     it "redirects to sign in page for unauthenticated users" do
