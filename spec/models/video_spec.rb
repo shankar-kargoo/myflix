@@ -9,13 +9,13 @@ describe Video do
     it "returns a empty array if there is no match" do 
       futurama = Video.create(title: "futurama", description: "space travel")
       back_to_future = Video.create(title: "back to future ", description: "time travel")
-      expect( Video.search_by_title("hello")).to eq([])
+      expect(Video.search_by_title("hello")).to eq([])
     end
     
     it "returns a empty array if empty search" do 
       futurama = Video.create(title: "futurama", description: "space travel")
       back_to_future = Video.create(title: "back to future ", description: "time travel")
-      expect( Video.search_by_title("")).to eq([])
+      expect(Video.search_by_title("")).to eq([])
     end
 
     it "returns an array of one video for an exact match" do
