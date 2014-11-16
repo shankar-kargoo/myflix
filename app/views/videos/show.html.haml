@@ -1,9 +1,42 @@
-%article.video_category
-  .videos.row
-    .video.col-sm-8
-      = link_to '' do
-        %img(src="/tmp/monk_large.jpg")
-    .video.col-sm-4
-      %strong #{@video.title}
-      <br>
-      #{@video.description}
+%article.video
+  .container-fluid
+    .row-fluid
+      .video_large_cover.col-sm-8
+        = link_to '' do
+          %img(src="/tmp/monk_large.jpg")
+      .video_info.col-sm-3
+        %header
+          .row-fluid
+          %h3= @video.title
+        %p= @video.description
+
+%section.reviews.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      =form_for [@video, Review.new] do |f|
+        %fieldset
+          .form-group
+            %label Rate this video
+            .row
+              .col-sm-3
+                =f.select :rating, options_for_select([5, 4, 3, 2, 1].map {|num| [pluralize(num, "star")]})
+          .form-group
+            %label Write Review
+            .row
+              .col-sm-6
+                =f.text_area  :content, rows: 6, cols: 75
+        %fieldset.form-group.actions.clearfix
+          %input(type="submit" value="Submit" class="btn")
+          = link_to "Cancel", @video
+
+      %header
+        %h3 User Reviews (#{@reviews.count})
+      %ul
+        - @reviews.each do |review|
+          %article.review
+            %li.row
+              .col-sm-2
+                %span Rating: #{review.rating} / 5
+                %p by <a href="">#{review.user.full_name}</a>
+              .col-sm-8
+                %p= review.content

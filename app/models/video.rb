@@ -1,7 +1,7 @@
 class Video < ActiveRecord::Base
   has_many :video_categories
   has_many :categories, through: :video_categories
-
+  has_many :reviews
 
   validates :title, presence: true, length: {minimum: 5}
   validates :description, presence: true

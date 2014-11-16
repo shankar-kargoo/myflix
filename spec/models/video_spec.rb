@@ -4,7 +4,8 @@ describe Video do
   it { should have_many(:categories)}
   it { should validate_presence_of(:title)}
   it { should validate_presence_of(:description)}
-
+  it {should have_many(:reviews).order("created_at DESC")}
+  
   describe do 
     it "returns a empty array if there is no match" do 
       futurama = Video.create(title: "futurama", description: "space travel")
