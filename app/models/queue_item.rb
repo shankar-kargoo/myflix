@@ -2,6 +2,8 @@ class QueueItem < ActiveRecord::Base
   belongs_to :video
   belongs_to :user
 
+  validates_numericality_of :position, {only_integer: true}
+
   def video_title
     self.video.title
   end
