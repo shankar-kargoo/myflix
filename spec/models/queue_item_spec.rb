@@ -31,5 +31,36 @@ describe QueueItem do
     end
   end
 
+  describe "#rating=" do
+    it "Could change the rating of the review when present" do
+      video = Fabricate(:video)
+      user = Fabricate(:user)
+      review = Fabricate(:review, user: user, video: video, rating: 2)
+      queue_item = Fabricate(:queue_item, video: video, user: user)
+      queue_item.rating = 4
+      expect(Review.first.rating).to eq(4)
+    end
+
+
+    it "Could detete the rating of a review if user chooses to" do
+      video = Fabricate(:video)
+      user = Fabricate(:user)
+      review = Fabricate(:review, user: user, video: video, rating: 2)
+      queue_item = Fabricate(:queue_item, video: video, user: user)
+      queue_item.rating = nil
+      expect(Review.first.rating).to be_nil
+    end
+
+    it "Could create a new review with a rating if video was previously unrated" do
+      video = Fabricate(:video)
+      user = Fabricate(:user)
+      queue_item = Fabricate(:queue_item, video: video, user: user)
+      queue_item.rating = 4
+      expect(Review.first.rating).to eq(4)
+
+    end
+
+  end
+
 
 end
